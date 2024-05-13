@@ -6,7 +6,7 @@ import { keyOutline, cardOutline, locationOutline, logOutOutline, settingsOutlin
 const UserDetails = () => {
   return (
     <div className='bg-black w-[300px] h-[480px] rounded-lg absolute top-16 right-2 flex flex-col'>
-        <div className='bg-[#1e477e] h-32 rounded-t-lg flex justify-evenly items-end flex-col text-white'>
+        <div className='bg-[#1e477e] h-28 rounded-t-lg flex justify-evenly items-end flex-col text-white'>
             <h1 className='text-center text-xl font-medium mr-[100px]'>Guru able</h1>
             <IonIcon icon={pencilOutline} className='w-6 h-6 text-xl mr-4 cursor-pointer hover:scale-[1.1] rounded-full'/>
         </div>
@@ -20,11 +20,11 @@ const UserDetails = () => {
                 <IonIcon icon={locationOutline}/>
             </div>
         </div>
-        <div className='flex flex-col justify-start text-white *:p-1 *:ml-4 *:flex *:items-center'>
-            <p className='hover:bg-gray-800 p-1'><IonIcon className='mr-2 text-xl' icon={logOutOutline}/> Log Out</p>
-            <p className='hover:bg-gray-800 p-1'><IonIcon className='mr-2 text-xl' icon={cameraOutline}/> Change Profile</p>
-            <p className='hover:bg-gray-800 p-1'><IonIcon className='mr-2 text-xl' icon={keyOutline}/> Change Password</p>
-            <p className='hover:bg-gray-800 p-1'><IonIcon className='mr-2 text-xl' icon={settingsOutline}/> Settings</p>
+        <div className='flex flex-col justify-start text-white *:p-1 *:ml-4 *:flex *:items-center *:text-sm'>
+            <p className='hover:bg-gray-800 p-2'><IonIcon className='mr-2 text-xl' icon={logOutOutline}/> Log Out</p>
+            <p className='hover:bg-gray-800 p-2'><IonIcon className='mr-2 text-xl' icon={cameraOutline}/> Change Profile</p>
+            <p className='hover:bg-gray-800 p-2'><IonIcon className='mr-2 text-xl' icon={keyOutline}/> Change Password</p>
+            <p className='hover:bg-gray-800 p-2'><IonIcon className='mr-2 text-xl' icon={settingsOutline}/> Settings</p>
         </div>
     </div>
   )

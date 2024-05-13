@@ -146,7 +146,7 @@ const Details = () => {
                 <div className='flex flex-col gap-[1px] mx-auto flex-1'>
                     <h2>Statistics</h2>
                     <hr />
-                    <ReactApexChart options={option} series={option.series} type="line" className='flex-1 mx-auto sm:w-[540px] sm:h-[270px] md:w-[640px] md:h-[320px]' />
+                    <ReactApexChart options={option} series={option.series} type="line" className='flex-1 mx-auto sm:w-[540px] md:w-[640px]' />
                 </div>
                 <div className='flex lg:flex-col w-full flex-wrap flex-1 gap-[1rem] mx-auto justify-center'>
                     {
