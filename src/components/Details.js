@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { IonIcon } from '@ionic/react';
 import { pieChart, swapVertical, alertCircle, logoTwitter, warning, calendar, pricetag, refresh, logoFacebook, logoDribbble } from 'ionicons/icons';
-import { Needs } from '../App';
 import ReactApexChart from 'react-apexcharts';
+import { useSelector } from 'react-redux';
 
 const Details = () => {
-    const info = useContext(Needs);
+    const redux = useSelector(state => state.counter);
 
     const arr = [
         {
@@ -84,17 +84,20 @@ const Details = () => {
     const lightColors = ['#ededed', '#fff'];
     const darkColors = ['#2c2c2c', '#1e1e1e'];
 
-    const gridColors = info.darkMode ? darkColors : lightColors;
-    const bg = info.darkMode ? '#1e2735' : '#fefefe';
+    const gridColors = redux.darkMode ? darkColors : lightColors;
+    const bg = redux.darkMode ? '#1e2735' : '#fefefe';
 
     var option = {
         chart: {
             type: 'line',
             sparkline: false,
-            background: bg
+            background: bg,
+            toolbar: {
+                show: false
+            }
         },
         theme: {
-            mode: info.darkMode ? 'dark' : 'light'
+            mode: redux.darkMode ? 'dark' : 'light'
         },
         stroke: {
             curve: 'smooth',
@@ -119,62 +122,64 @@ const Details = () => {
     };
 
     return (
-        <div className={`mt-16 duration-500 ease-in-out ${info.darkMode ? 'bg-gray-800 text-white' : 'bg-[#   fefefe]'}`}>
-            <div className={`${info.isSidebarVisible ? 'lg:ml-[320px] mr-2' : ''} flex flex-wrap justify-center flex-col sm:flex-row max-w-[90%] gap-[2rem] py-8 mx-auto`}>
-                {
-                    arr.map((data, index) => (
-                        <div key={index}
-                            className="group sm:flex-1 shrink-0 min-w-[150px] sm:max-lg:min-w-[300px] flex flex-col h-28 rounded-lg shadow-xl border border-1">
-                            <div className="p-2 flex justify-between relative">
-                                <div>
-                                    <IonIcon icon={data.icon1} className={`text-3xl text-white p-2 rounded-lg absolute bottom-8 left-5 ${data.bg} group-hover:bottom-10 duration-200`} />
-                                </div>
-                                <div className="text-center">
-                                    <p className={`${data.text} font-medium`}>{data.p1}</p>
-                                    <h1 className="font-medium">{data.h1}</h1>
-                                </div>
-                            </div>
-                            <p className="text-xs mt-2 ml-4 flex items-center">
-                                <IonIcon icon={data.icon2} className={`text-2xl ${data.text} mr-2`} />{data.p2}
-                            </p>
-                        </div>
-                    ))
-                }
-
-            </div>
-            <div className={`${info.isSidebarVisible ? 'lg:ml-[320px] mr-2' : ''} flex flex-col items-start lg:flex-row max-w-[90%] justify-center gap-[2rem] mx-auto pb-10 duration-500 ease-in-out`}>
-                <div className='flex flex-col gap-[1px] mx-auto flex-1'>
-                    <h2>Statistics</h2>
-                    <hr />
-                    <ReactApexChart options={option} series={option.series} type="line" className='flex-1 mx-auto sm:w-[540px] md:w-[640px]' />
-                </div>
-                <div className='flex lg:flex-col w-full flex-wrap flex-1 gap-[1rem] mx-auto justify-center'>
+        <div className={`mt-16 duration-500 ease-in-out ${redux.darkMode ? 'bg-gray-800 text-white' : 'bg-[#fefefe]'}`}>
+            <div className='max-w-screen-xl'>
+                <div className={`${redux.isSidebarVisible ? 'lg:ml-[320px] mr-2' : ''} flex flex-wrap justify-center flex-col sm:flex-row max-w-[90%] gap-[2rem] py-8 mx-auto`}>
                     {
-                        array2.map((data, index) => (
-                            <div key={index} className="sm:max-md:max-w-[250px] w-full lg:flex-1">
-                                <div className={`flex gap-[1rem] p-2 ${data.bg}`}>
+                        arr.map((data, index) => (
+                            <div key={index}
+                                className="group sm:flex-1 shrink-0 min-w-[150px] sm:max-lg:min-w-[300px] flex flex-col h-28 rounded-lg shadow-xl border border-1">
+                                <div className="p-2 flex justify-between relative">
                                     <div>
-                                        <IonIcon icon={data.logo} className={`p-2 text-2xl text-white ${data.bg2} rounded-3xl`} />
+                                        <IonIcon icon={data.icon1} className={`text-3xl text-white p-2 rounded-lg absolute bottom-8 left-5 ${data.bg} group-hover:bottom-10 duration-200`} />
                                     </div>
-                                    <div className="text-white text-sm">
-                                        <p className="font-medium">{data.app}</p>
-                                        <p>{data.p1}</p>
+                                    <div className="text-center">
+                                        <p className={`${data.text} font-medium`}>{data.p1}</p>
+                                        <h1 className="font-medium">{data.h1}</h1>
                                     </div>
                                 </div>
-                                <div className="flex justify-evenly items-center p-2 shadow-xl border border-1">
-                                    <div className="text-center">
-                                        <h1 className="font-medium">{data.n1}</h1>
-                                        <p className="text-sm text-slate-500">{data.p2}</p>
-                                    </div>
-                                    <div className="w-[.1rem] h-12 border border-1 border-slate-300"></div>
-                                    <div className="text-center">
-                                        <h1 className="font-medium">{data.n2}</h1>
-                                        <p className="text-sm text-slate-500">{data.p3}</p>
-                                    </div>
-                                </div>
+                                <p className="text-xs mt-2 ml-4 flex items-center">
+                                    <IonIcon icon={data.icon2} className={`text-2xl ${data.text} mr-2`} />{data.p2}
+                                </p>
                             </div>
                         ))
                     }
+
+                </div>
+                <div className={`${redux.isSidebarVisible ? 'lg:ml-[320px] mr-2' : ''} flex flex-col items-start lg:flex-row max-w-[90%] justify-between gap-[2rem] mx-auto duration-500 ease-in-out`}>
+                    <div className='flex flex-col gap-[1px] mx-auto flex-1'>
+                        <h2>Statistics</h2>
+                        <hr />
+                        <ReactApexChart options={option} series={option.series} height={400} type="line" className={`flex-1 mx-auto w-auto sm:w-[640px] ${redux.isSidebarVisible ? 'lg:w-[480px]' : ''}`} />
+                    </div>
+                    <div className='flex lg:flex-col w-full flex-wrap flex-1 gap-[1rem] mx-auto justify-center items-end'>
+                        {
+                            array2.map((data, index) => (
+                                <div key={index} className="max-w-sm w-full lg:flex-1">
+                                    <div className={`flex gap-[1rem] p-2 ${data.bg}`}>
+                                        <div>
+                                            <IonIcon icon={data.logo} className={`p-2 text-2xl text-white ${data.bg2} rounded-3xl`} />
+                                        </div>
+                                        <div className="text-white text-sm">
+                                            <p className="font-medium">{data.app}</p>
+                                            <p>{data.p1}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex justify-evenly items-center p-2 shadow-xl border border-1">
+                                        <div className="text-center">
+                                            <h1 className="font-medium">{data.n1}</h1>
+                                            <p className="text-sm text-slate-500">{data.p2}</p>
+                                        </div>
+                                        <div className="w-[.1rem] h-12 border border-1 border-slate-300"></div>
+                                        <div className="text-center">
+                                            <h1 className="font-medium">{data.n2}</h1>
+                                            <p className="text-sm text-slate-500">{data.p3}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
                 </div>
             </div>
         </div>

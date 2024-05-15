@@ -1,12 +1,11 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { IonIcon } from '@ionic/react'
 import { homeOutline, grid, newspaperOutline, copyOutline, statsChartOutline, navigateCircleOutline, gridOutline, caretDownOutline, searchOutline, chevronForwardOutline } from 'ionicons/icons'
-import profilePic from '../images/compressed.jpg'
 import logo from '../images/Logo_G.png'
-import { Needs } from '../App'
+import { useSelector } from 'react-redux'
 
 const Sidebar = () => {
-  const info = useContext(Needs)
+  const redux = useSelector(state => state.counter)
   const array = [
     {
       heading: 'Layout',
@@ -33,9 +32,9 @@ const Sidebar = () => {
     }
   ]
   return (
-    <div className={`sidebar h-screen ${info.isSidebarVisible ? 'absolute left-0' : 'absolute left-[-100vw]'} w-[300px] duration-300 z-20`}>
+    <div className={`sidebar h-screen ${redux.isSidebarVisible ? 'absolute left-0' : 'absolute left-[-100vw]'} w-[300px] duration-300 z-20`}>
       <div id="menuItems"
-        className={`pb-4 flex flex-col gap-[1rem] menuItems w-[300px] absolute duration-300 shadow-xl ${info.darkMode ? 'bg-gray-900' : 'bg-white'} `}>
+        className={`pb-4 flex flex-col gap-[1rem] menuItems w-[300px] absolute duration-300 shadow-xl ${redux.darkMode ? 'bg-gray-900' : 'bg-white'} `}>
         <div className="px-3 py-2 flex justify-between items-center flex-row bg-gray-900 rounded-tl-2xl">
           <div className="flex justify-center items-center gap-[1vw]">
             <div className="">
@@ -49,7 +48,7 @@ const Sidebar = () => {
 
         <div className='flex flex-col gap-[1rem] h-[80vh] overflow-y-scroll' style={{ scrollbarWidth: 'none' }}>
           <div className="px-3 flex gap-[1rem]">
-            <img srcSet={profilePic} className="w-12 h-12 object-cover" alt="" />
+            <img srcSet={redux.profile} className="w-12 h-12 object-cover" alt="" />
             <div className="text-start">
               <h1 className="font-bold">John Doe</h1>
               <h2 className="text-slate-600">
@@ -69,14 +68,14 @@ const Sidebar = () => {
             array.map((data, index) => (
               <div className="px-3" key={index}>
                 <p className="text-slate-500">{data.heading}</p>
-                <button className={`group w-full p-2 flex items-center ${info.darkMode ? 'hover:bg-gray-800' : 'hover:bg-slate-200'} duration-100 cursor-pointer focus:font-bold flex justify-between`}>
+                <button className={`group w-full p-2 flex items-center ${redux.darkMode ? 'hover:bg-gray-800' : 'hover:bg-slate-200'} duration-100 cursor-pointer focus:font-bold flex justify-between`}>
                   <div className='flex items-center'>
                     <span className="mr-2 flex items-center"><IonIcon title={data.m1} className="text-white text-2xl bg-blue-500 rounded-sm p-1"
                       icon={data.mi1} /></span>{data.m1}
                   </div>
                   <IonIcon icon={chevronForwardOutline} className='text-xl text-slate-500 hidden group-hover:block' />
                 </button>
-                <button className={`group w-full p-2 flex items-center ${info.darkMode ? 'hover:bg-gray-800' : 'hover:bg-slate-200'} duration-100 cursor-pointer focus:font-bold flex justify-between item`}>
+                <button className={`group w-full p-2 flex items-center ${redux.darkMode ? 'hover:bg-gray-800' : 'hover:bg-slate-200'} duration-100 cursor-pointer focus:font-bold flex justify-between item`}>
                   <div className='flex items-center'>
                     <span className="mr-2 flex items-center"><IonIcon title={data.m2} className="text-white text-2xl bg-red-500 rounded-sm p-1"
                       icon={data.mi2} /></span>{data.m2}
@@ -85,7 +84,7 @@ const Sidebar = () => {
                 </button>
                 {
                   data.m3 ? (
-                    <button className={`group w-full p-2 flex items-center ${info.darkMode ? 'hover:bg-gray-800' : 'hover:bg-slate-200'} duration-100 cursor-pointer focus:font-bold flex justify-between item`}>
+                    <button className={`group w-full p-2 flex items-center ${redux.darkMode ? 'hover:bg-gray-800' : 'hover:bg-slate-200'} duration-100 cursor-pointer focus:font-bold flex justify-between item`}>
                       <div className='flex items-center'>
                         <span className="mr-2 flex items-center"><IonIcon title={data.m3} className="text-white text-2xl bg-green-500 rounded-sm p-1"
                           icon={data.mi3} /></span>{data.m3}
